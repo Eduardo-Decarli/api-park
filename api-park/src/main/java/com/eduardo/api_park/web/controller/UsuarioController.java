@@ -4,6 +4,7 @@ import com.eduardo.api_park.entity.Usuario;
 import com.eduardo.api_park.service.UsuarioService;
 import com.eduardo.api_park.web.controller.dto.UsuarioCreateDTO;
 import com.eduardo.api_park.web.controller.dto.UsuarioResponseDTO;
+import com.eduardo.api_park.web.controller.dto.UsuarioSenhaDTO;
 import com.eduardo.api_park.web.controller.dto.mapper.UsuarioMepper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,9 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> updatePassword(@PathVariable Long id, @RequestBody Usuario usuario){
-        Usuario user = usuarioService.editarSenha(id, usuario.getPassword());
-        return ResponseEntity.ok(user);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UsuarioSenhaDTO dto){
+        Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
