@@ -2,6 +2,9 @@ package com.eduardo.api_park.web.controller;
 
 import com.eduardo.api_park.entity.Usuario;
 import com.eduardo.api_park.service.UsuarioService;
+import com.eduardo.api_park.web.controller.dto.UsuarioCreateDTO;
+import com.eduardo.api_park.web.controller.dto.UsuarioResponseDTO;
+import com.eduardo.api_park.web.controller.dto.mapper.UsuarioMepper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +22,15 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
-        Usuario user = usuarioService.salvar(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody UsuarioCreateDTO createDto){
+        Usuario user = usuarioService.salvar(UsuarioMepper.toUsuario(createDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioMepper.toDTO(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getById(@PathVariable Long id){
+    public ResponseEntity<UsuarioResponseDTO> getById(@PathVariable Long id){
         Usuario user = usuarioService.buscarPorId(id);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(UsuarioMepper.toDTO(user));
     }
 
     @PatchMapping("/{id}")
