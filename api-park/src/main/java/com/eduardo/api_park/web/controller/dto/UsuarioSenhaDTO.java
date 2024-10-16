@@ -1,9 +1,20 @@
 package com.eduardo.api_park.web.controller.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class UsuarioSenhaDTO {
 
+    private String password;
+    @NotBlank // Não permite Senhas vazias
+    @Size(min = 6, max = 6) // Não permite senhas menores ou maiores que 6
     private String senhaAtual;
+    @NotBlank
+    @Size(min = 6, max = 6)
     private String novaSenha;
+    @NotBlank
+    @Size(min = 6, max = 6)
     private String confirmaSenha;
 
     public UsuarioSenhaDTO() {

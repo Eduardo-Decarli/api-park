@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UsuarioMepper {
 
     public static Usuario toUsuario(UsuarioCreateDTO createDto){
@@ -24,5 +27,9 @@ public class UsuarioMepper {
                 mapper -> mapper.map(src -> role, UsuarioResponseDTO::setRole)
         );
           return mapperMain.map(usuario, UsuarioResponseDTO.class);
+    }
+
+    public static List<UsuarioResponseDTO> toListDto(List<Usuario> usuario){
+        return usuario.stream().map(user -> toDTO(user)).collect(Collectors.toList());
     }
 }
