@@ -30,6 +30,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+
     @Operation(summary = "Criar um novo usuário", description = "Recurso para criar um novo usuario",
     responses = {
             @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
